@@ -1,0 +1,53 @@
+<!-- home.html -->
+
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Welcome to Django{% endblock %}
+{% block head %}
+    <div class="jumbotron">
+        <div class="container">
+            {% if not user.is_authenticated %}
+                <h1>Hello! Welcome to applications</h1>
+                <p>Look this list books</p>
+            {% else %}
+                {% if user.first_name %}
+                    <h1>Добро пожаловать {{ user.first_name }} {{ user.last_name }}</h1>
+                {% else %}
+                    <h1> Добро пожаловать {{ user.username }}</h1>
+                {% endif %}
+            {% endif %}
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>№ п/п</th>
+                    <th>Название книги</th>
+                    <th>Купить/Скачать</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for element in popular_books %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><a href="{% url 'product:book_info' element.book.id %}">{{ element.book.title }}</a></td>
+                        <td>Купить</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2>Книги</h2>
+                    <p>В данном разделе вы можете купить книги</p>
+                    <p><a class="btn btn-default" href="{% url 'product:list_book' %}" role="button">View details &raquo;</a></p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

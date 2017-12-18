@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Welcome to Django{% endblock %}
+{% block head %}
+    <div class="jumbotron">
+        <div class="container">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>№ п/п</th>
+                    <th>Название книги</th>
+                    <th>Купить/Скачать</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><a href="{% url 'product:book_info' book.id %}">{{ book.title }}</a></td>
+                        <td>Купить</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Welcome to Django{% endblock %}
+{% block head %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>{{ book.title }}</h1>
+            <h3>{{ book.description }}</h3>
+        </div>
+    </div>
+{% endblock %}
